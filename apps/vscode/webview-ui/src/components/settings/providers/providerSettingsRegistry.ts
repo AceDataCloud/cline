@@ -36,6 +36,11 @@ const CUSTOM_PROVIDER_SETTINGS_IDS = new Set([
 ])
 
 const GENERIC_PROVIDER_PRESENTATION_OVERRIDES: Record<string, GenericProviderPresentationOverride> = {
+	acedatacloud: {
+		allowsCustomIds: true,
+		signupUrl:
+			"https://platform.acedata.cloud/console/applications?utm_source=cli&utm_medium=referral&utm_campaign=evergreen&utm_content=cline_provider_api_key",
+	},
 	baseten: {
 		signupUrl: "https://app.baseten.co/settings/api_keys",
 	},
@@ -158,6 +163,7 @@ export function getGenericProviderSettings(
 }
 
 const FALLBACK_GENERIC_PROVIDER_NAMES = {
+	acedatacloud: "Ace Data Cloud",
 	deepseek: "DeepSeek",
 	doubao: "Doubao",
 	gemini: "Gemini",

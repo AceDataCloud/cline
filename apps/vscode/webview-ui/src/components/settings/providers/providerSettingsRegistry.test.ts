@@ -216,3 +216,13 @@ describe("providerSettingsRegistry", () => {
 		expect(getFallbackGenericProviderSettings("openai")).toBeUndefined()
 	})
 })
+
+it("shows Ace Data Cloud with the account key link and manual model entry", () => {
+	const result = getGenericProviderSettings("acedatacloud", listing({ id: "acedatacloud", name: "Ace Data Cloud" }))
+	expect(result?.providerName).toBe("Ace Data Cloud")
+	expect(result?.allowsCustomIds).toBe(true)
+	expect(result?.signupUrl).toContain("/console/applications?")
+	expect(result?.signupUrl).toContain("utm_content=cline_provider_api_key")
+	expect(getFallbackGenericProviderSettings("acedatacloud")?.providerName).toBe("Ace Data Cloud")
+	expect(hasCustomProviderSettings("acedatacloud")).toBe(false)
+})
