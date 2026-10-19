@@ -3,6 +3,7 @@ import { ApiFormat } from "./proto/cline/models"
 import type { ApiHandlerSettings } from "./storage/state-keys"
 
 export type ApiProvider =
+	| "acedatacloud"
 	| "anthropic"
 	| "claude-code"
 	| "openrouter"

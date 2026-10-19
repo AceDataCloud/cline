@@ -28,3 +28,12 @@ describe("getProviderApiKeyUrl", () => {
 		expect(getProviderApiKeyUrl({ id: "", docUrl: "   " })).toBeNull();
 	});
 });
+
+it("links Ace Data Cloud credentials to the application key page", () => {
+	expect(getProviderApiKeyUrl({ id: "acedatacloud" })).toContain(
+		"https://platform.acedata.cloud/console/applications?",
+	);
+	expect(getProviderApiKeyUrl({ id: "acedatacloud" })).toContain(
+		"utm_content=cline_desktop_provider_api_key",
+	);
+});

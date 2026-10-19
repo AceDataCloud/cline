@@ -768,6 +768,31 @@ const clinePass = createClineLikeSpec({
  */
 const OPENAI_COMPATIBLE_SPEC_OVERRIDES: BuiltinSpecOverride[] = [
 	{
+		id: "acedatacloud",
+		name: "Ace Data Cloud",
+		description: "Model access through Ace Data Cloud with your own API key",
+		family: "openai-compatible",
+		protocol: "openai-chat",
+		defaultModelId: "gpt-4.1",
+		apiKeyEnv: ["ACEDATACLOUD_API_KEY"],
+		modelsProviderId: "acedatacloud",
+		modelsFactory: () => {
+			const models = generatedModels("acedatacloud");
+			return Object.keys(models).length > 0
+				? models
+				: {
+						"gpt-4.1": {
+							id: "gpt-4.1",
+							name: "GPT-4.1",
+							capabilities: ["streaming", "tools"],
+						},
+					};
+		},
+		docsUrl:
+			"https://platform.acedata.cloud/documents/cline-vscode-integration?utm_source=cli&utm_medium=referral&utm_campaign=evergreen&utm_content=cline_provider_docs",
+		defaults: { baseUrl: "https://api.acedata.cloud/v1" },
+	},
+	{
 		// Keep the persisted provider ID and credentials compatible while the
 		// upstream catalog adopts the CoreWeave display name.
 		id: "wandb",

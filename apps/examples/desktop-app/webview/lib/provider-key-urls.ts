@@ -5,6 +5,8 @@
  * to bring a key from. Everything else simply renders no link.
  */
 const PROVIDER_API_KEY_URLS: Record<string, string> = {
+	acedatacloud:
+		"https://platform.acedata.cloud/console/applications?utm_source=cli&utm_medium=referral&utm_campaign=evergreen&utm_content=cline_desktop_provider_api_key",
 	anthropic: "https://console.anthropic.com/settings/keys",
 	"openai-native": "https://platform.openai.com/api-keys",
 	openai: "https://platform.openai.com/api-keys",

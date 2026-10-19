@@ -1,0 +1,29 @@
+---
+title: "Ace Data Cloud"
+description: "Configure the proposed Ace Data Cloud provider with your own API key."
+---
+
+<Note>This named provider contribution is prepared for maintainer review. It is not part of the currently published Cline release. Until accepted and released, use the existing [OpenAI Compatible](/provider-config/openai-compatible) setup with the same endpoint.</Note>
+
+## Connect your account
+
+1. Register or sign in to [Ace Data Cloud → Applications](https://platform.acedata.cloud/console/applications?utm_source=cli&utm_medium=referral&utm_campaign=evergreen&utm_content=cline_provider_api_key).
+2. Open **General application**, or initialize it if it does not exist. Copy its API Key, or choose **Manage Keys → Create** for a dedicated `Cline` key. Check the selected models' access, current balance, expiration, usage limits and Allowed APIs.
+3. In a Cline build containing this contribution, select **Ace Data Cloud** as the API Provider and paste the raw key in **API Key**. The default endpoint is `https://api.acedata.cloud/v1`; do not add `/chat/completions`.
+4. Enter an exact Chat Completions model ID available to your account. The initial model is `gpt-4.1`. The separately reviewed models.dev catalog can populate more options once accepted and regenerated; its pending status must not be presented as a full model picker today.
+
+![Copy an Ace application API key or open Manage Keys](https://raw.githubusercontent.com/AceDataCloud/SunoDify/8d3d03570e73324220f111f7fe343da0792a8071/_assets/tutorial/get-api-key-en.png)
+
+![Create a dedicated key with optional restrictions](https://raw.githubusercontent.com/AceDataCloud/SunoDify/8d3d03570e73324220f111f7fe343da0792a8071/_assets/tutorial/create-api-key-en.png)
+
+These existing redacted Ace console screenshots are reused for the same account controls (collected 2026-10-18). They do not show a completed Cline connection. Copy only the token string, not `Bearer ` or redacted characters. A platform management token cannot replace an API key.
+
+The environment variable is `ACEDATACLOUD_API_KEY`. Keep the key out of prompts, Git and screenshots. No fallback to another model/provider is added. This contribution reuses Cline's OpenAI Chat Completions adapter; it does not claim all Ace models support tool calls, Responses, Messages, vision or every optional feature.
+
+## Usage and cost
+
+Model requests can be charged. Check [current models and pricing](https://platform.acedata.cloud/models?utm_source=cli&utm_medium=referral&utm_campaign=evergreen&utm_content=cline_provider_models) and [usage history](https://platform.acedata.cloud/console/usages?utm_source=cli&utm_medium=referral&utm_campaign=evergreen&utm_content=cline_provider_usage). Prices vary by model, package and account. Missing cost metadata in a Cline display is not a free-call promise. No other provider's price table is copied.
+
+An authorized end-to-end test should make a short model request, then exercise one local read-only tool and confirm its tool result returns to the same model. This source contribution is tested locally without paid calls; no new live request is claimed.
+
+Suno, Seedance, HappyHorse, GPT Image and Nano Banana MCP tools are separate integrations under Cline's MCP settings/marketplace. Their async tasks must be queried by the same returned task ID; configuring a model provider does not install or authorize these services.

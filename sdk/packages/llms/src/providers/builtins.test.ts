@@ -623,3 +623,23 @@ describe("regional API line base URLs", () => {
 		}
 	});
 });
+
+describe("Ace Data Cloud named provider", () => {
+	it("uses its own credentials and Chat Completions endpoint without routing to another provider", async () => {
+		const spec = BUILTIN_SPECS.find((entry) => entry.id === "acedatacloud");
+		expect(spec?.name).toBe("Ace Data Cloud");
+		expect(spec?.family).toBe("openai-compatible");
+		expect(spec?.protocol).toBe("openai-chat");
+		expect(spec?.apiKeyEnv).toEqual(["ACEDATACLOUD_API_KEY"]);
+		expect(spec?.defaults?.baseUrl).toBe("https://api.acedata.cloud/v1");
+		expect(spec?.modelsProviderId).toBe("acedatacloud");
+		const provider = await getProvider("acedatacloud");
+		expect(provider.name).toBe("Ace Data Cloud");
+		expect(provider.protocol).toBe("openai-chat");
+		expect(provider.defaultModelId).toBe("gpt-4.1");
+		const models = spec?.modelsFactory?.();
+		expect(models?.["gpt-4.1"].capabilities).toEqual(["streaming", "tools"]);
+		expect(models?.["gpt-4.1"].pricing).toBeUndefined();
+		expect(models?.["gpt-4.1"].contextWindow).toBeUndefined();
+	});
+});
